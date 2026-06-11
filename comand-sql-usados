@@ -1,0 +1,43 @@
+-- Chamando o Banco de dados
+USE financeiro;
+
+-- Selecionando a Tabela
+SELECT * FROM financeiro;
+
+-- Contagem por Cleintes cancelados
+SELECT  COUNT(*) AS total_cancelamentos 
+FROM financeiro;
+
+-- Distribuição dos cancelamentos por motivo
+SELECT
+    `MOTIVO`,
+    COUNT(*) AS total_cancelamentos
+FROM financeiro
+GROUP BY `MOTIVO`
+ORDER BY total_cancelamentos DESC;
+
+-- Impacto financeiro por motivo
+SELECT
+    `MOTIVO`,
+    COUNT(*) AS total_cancelamentos,
+    SUM(`VALOR DO PLANO`) AS valor_total_planos
+FROM financeiro
+GROUP BY `MOTIVO`
+ORDER BY valor_total_planos DESC;
+
+-- Cidades com mais cancelamentos
+SELECT
+    `CIDADE`,
+    COUNT(*) AS total_cancelamentos
+FROM financeiro
+GROUP BY `CIDADE`
+ORDER BY total_cancelamentos DESC;
+
+-- Planos mais cancelados
+SELECT
+    `PLANO`,
+    COUNT(*) AS total_cancelamentos,
+    AVG(`VALOR DO PLANO`) AS ticket_medio
+FROM financeiro
+GROUP BY `PLANO`
+ORDER BY total_cancelamentos DESC;
